@@ -1,7 +1,9 @@
 package com.chy.radio
 
 import androidx.compose.ui.window.ComposeUIViewController
+import com.chy.radio.di.initKoin
 import com.chy.radio.sample.SimulatedAudioPlayer
+import org.koin.mp.KoinPlatform
 import platform.UIKit.UIViewController
 
 /**
@@ -12,6 +14,12 @@ import platform.UIKit.UIViewController
  * name reads as "the main view controller" on the iOS side.
  */
 @Suppress("ktlint:standard:function-naming")
-fun MainViewController(): UIViewController = ComposeUIViewController {
-    App(playerFactory = { SimulatedAudioPlayer() })
+fun MainViewController(): UIViewController {
+    // iOS has no Application class like Android. This is the first Kotlin code Swift calls,
+    // so DI starts here. SwiftUI can create the controller more than once, and startKoin
+    // throws if Koin is already started.
+    if (KoinPlatform.getKoinOrNull() == null) {
+        initKoin(playerFactory = { SimulatedAudioPlayer() })
+    }
+    return ComposeUIViewController { App() }
 }
