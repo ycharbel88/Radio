@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_title">Radio France</string>
+    <plurals name="stations_live">
+        <item quantity="one">%1$d station en direct</item>
+        <item quantity="other">%1$d stations en direct</item>
+    </plurals>
+
+    <string name="loading">Chargement des stations</string>
+    <string name="empty_message">Aucune station n’est disponible pour le moment. Réessayez dans quelques instants.</string>
+    <string name="action_retry">Réessayer</string>
+
+    <string name="subtitle_webradio">Webradio · %1$s</string>
+    <string name="subtitle_local">Radio locale · %1$s</string>
+
+    <!-- Only someone building from source can see these two, so they name the setting to fix. -->
+    <string name="error_missing_api_key">Clé d’API absente. Ajoutez RADIOFRANCE_API_KEY dans local.properties, puis recompilez l’application.</string>
+    <string name="error_invalid_api_key">La clé d’API a été refusée par Radio France. Vérifiez RADIOFRANCE_API_KEY dans local.properties, puis recompilez l’application.</string>
+    <string name="error_quota_exceeded">Le service est saturé pour aujourd’hui. Revenez demain pour écouter vos stations.</string>
+    <string name="error_network">Pas de connexion internet. Vérifiez votre réseau, puis réessayez.</string>
+    <string name="error_server">Le service Radio France ne répond pas pour le moment. Réessayez dans quelques instants.</string>
+
+    <string name="player_buffering">Chargement</string>
+    <string name="player_playing">En lecture</string>
+    <string name="player_error">Lecture impossible</string>
+    <string name="playback_error_network">La connexion au direct a été perdue. Touchez la station pour relancer l’écoute.</string>
+    <string name="playback_error_stream_unavailable">Cette station ne peut pas être lue pour le moment. Essayez-en une autre.</string>
+</resources>

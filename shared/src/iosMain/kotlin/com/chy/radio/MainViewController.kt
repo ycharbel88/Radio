@@ -1,6 +1,7 @@
 package com.chy.radio
 
 import androidx.compose.ui.window.ComposeUIViewController
+import com.chy.radio.sample.SimulatedAudioPlayer
 import platform.UIKit.UIViewController
 
 /**
@@ -11,4 +12,6 @@ import platform.UIKit.UIViewController
  * name reads as "the main view controller" on the iOS side.
  */
 @Suppress("ktlint:standard:function-naming")
-fun MainViewController(): UIViewController = ComposeUIViewController { App() }
+fun MainViewController(): UIViewController = ComposeUIViewController {
+    App(playerFactory = { SimulatedAudioPlayer() })
+}
