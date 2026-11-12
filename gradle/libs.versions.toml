@@ -12,6 +12,7 @@ kotlin = "2.4.21"
 # stable APIs are used.
 material3 = "1.12.0-alpha03"
 kotlinxCoroutines = "1.11.0"
+koin = "4.2.2"
 ktlintGradle = "14.2.0"
 ktlint = "1.8.0"
 
@@ -27,6 +28,9 @@ compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "composeMul
 compose-components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "composeMultiplatform" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+# koinViewModel() in composables. Brings koin-core-viewmodel (the viewModel { } DSL) as api.
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
