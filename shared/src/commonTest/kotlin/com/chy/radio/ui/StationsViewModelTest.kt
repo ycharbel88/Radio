@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.chy.radio.domain.AudioPlayer
+import com.chy.radio.FakeAudioPlayer
 import com.chy.radio.domain.DataError
 import com.chy.radio.domain.DataResult
 import com.chy.radio.domain.PlayerState
@@ -18,7 +18,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
@@ -34,7 +33,7 @@ class StationsViewModelTest {
     private val inter = station("FRANCEINTER", brandName = "France Inter")
 
     private val repository = TestRepository(DataResult.Success(listOf(inter, fip, fipRock)))
-    private val player = TestPlayer()
+    private val player = FakeAudioPlayer()
 
     @BeforeTest
     fun setUp() {
@@ -150,25 +149,6 @@ class StationsViewModelTest {
 
 private class TestRepository(var result: DataResult<List<Station>>) : StationRepository {
     override suspend fun stations(): DataResult<List<Station>> = result
-}
-
-// An ideal player: play and stop take effect at once. Tests set `state` directly for
-// what a real player reports on its own (buffering, errors).
-private class TestPlayer : AudioPlayer {
-    override val state = MutableStateFlow<PlayerState>(PlayerState.Idle)
-    var isReleased = false
-
-    override fun play(station: Station) {
-        state.value = PlayerState.Playing(station)
-    }
-
-    override fun stop() {
-        state.value = PlayerState.Idle
-    }
-
-    override fun release() {
-        isReleased = true
-    }
 }
 
 private fun station(id: String, brandName: String) = Station(
