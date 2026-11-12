@@ -54,6 +54,11 @@ kotlin {
             // NSURLSession on iOS. No Ktor.
             implementation(libs.apollo.runtime)
         }
+        androidMain.dependencies {
+            implementation(libs.androidx.media3.exoplayer)
+            // ProcessLifecycleOwner: stop the sound when the app leaves the foreground.
+            implementation(libs.androidx.lifecycle.process)
+        }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.kotlinx.coroutines.test)
