@@ -1,7 +1,10 @@
 package com.chy.radio.di
 
 import com.chy.radio.FakeAudioPlayer
+import com.chy.radio.FakeStationRepository
 import com.chy.radio.domain.AudioPlayer
+import com.chy.radio.domain.DataResult
+import com.chy.radio.domain.StationRepository
 import com.chy.radio.ui.StationsViewModel
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
@@ -14,12 +17,20 @@ import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.koin.dsl.koinApplication
+import org.koin.dsl.module
 
 // koinApplication, not startKoin: an isolated graph per test, no global Koin to stop.
 @OptIn(ExperimentalCoroutinesApi::class)
 class KoinGraphTest {
+    // The second module replaces the Apollo repository (Koin keeps the last definition),
+    // so the test never builds a real client or sends a request.
     private val koinApplication = koinApplication {
-        modules(appModule(playerFactory = { FakeAudioPlayer() }))
+        modules(
+            appModule(playerFactory = { FakeAudioPlayer() }),
+            module {
+                single<StationRepository> { FakeStationRepository(DataResult.Success(emptyList())) }
+            }
+        )
     }
 
     // The ViewModel starts loading on Dispatchers.Main as soon as it is created.

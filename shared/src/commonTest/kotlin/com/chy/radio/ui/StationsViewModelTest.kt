@@ -5,12 +5,12 @@ import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.chy.radio.FakeAudioPlayer
+import com.chy.radio.FakeStationRepository
 import com.chy.radio.domain.DataError
 import com.chy.radio.domain.DataResult
 import com.chy.radio.domain.PlayerState
 import com.chy.radio.domain.Station
 import com.chy.radio.domain.StationKind
-import com.chy.radio.domain.StationRepository
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -32,7 +32,7 @@ class StationsViewModelTest {
     private val fipRock = station("FIP_ROCK", brandName = "FIP")
     private val inter = station("FRANCEINTER", brandName = "France Inter")
 
-    private val repository = TestRepository(DataResult.Success(listOf(inter, fip, fipRock)))
+    private val repository = FakeStationRepository(DataResult.Success(listOf(inter, fip, fipRock)))
     private val player = FakeAudioPlayer()
 
     @BeforeTest
@@ -145,10 +145,6 @@ class StationsViewModelTest {
 
         assertTrue(player.isReleased)
     }
-}
-
-private class TestRepository(var result: DataResult<List<Station>>) : StationRepository {
-    override suspend fun stations(): DataResult<List<Station>> = result
 }
 
 private fun station(id: String, brandName: String) = Station(

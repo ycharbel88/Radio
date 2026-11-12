@@ -1,8 +1,9 @@
 package com.chy.radio.di
 
+import com.chy.radio.data.ApolloStationRepository
+import com.chy.radio.data.BuildKonfig
 import com.chy.radio.domain.AudioPlayer
 import com.chy.radio.domain.StationRepository
-import com.chy.radio.sample.SampleStationRepository
 import com.chy.radio.ui.StationsViewModel
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.viewModel
@@ -13,7 +14,8 @@ import org.koin.dsl.module
  * Each platform passes its own player through [playerFactory].
  */
 fun appModule(playerFactory: () -> AudioPlayer) = module {
-    single<StationRepository> { SampleStationRepository() }
+    // A single: one ApolloClient (and its connection pool) per process.
+    single<StationRepository> { ApolloStationRepository(BuildKonfig.RADIOFRANCE_API_KEY) }
 
     // A factory, never a single. Each ViewModel releases its own player in onCleared(), so
     // a single would hand a released player to the next ViewModel (back out of the app,
