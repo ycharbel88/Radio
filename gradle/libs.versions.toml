@@ -13,6 +13,8 @@ kotlin = "2.4.21"
 material3 = "1.12.0-alpha03"
 kotlinxCoroutines = "1.11.0"
 koin = "4.2.2"
+apollo = "5.2.0"
+buildkonfig = "0.23.0"
 ktlintGradle = "14.2.0"
 ktlint = "1.8.0"
 
@@ -31,6 +33,7 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 # koinViewModel() in composables. Brings koin-core-viewmodel (the viewModel { } DSL) as api.
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
+apollo-runtime = { module = "com.apollographql.apollo:apollo-runtime", version.ref = "apollo" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -39,3 +42,5 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMul
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradle" }
+apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
