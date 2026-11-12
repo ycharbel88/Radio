@@ -44,7 +44,7 @@ val PlayerState.station: Station?
         is PlayerState.Error -> station
     }
 
-// Why playback failed. Typed so the UI owns the wording.
+/** Why playback failed. Typed so the UI owns the wording. */
 enum class PlaybackError {
     Network,
     StreamUnavailable
